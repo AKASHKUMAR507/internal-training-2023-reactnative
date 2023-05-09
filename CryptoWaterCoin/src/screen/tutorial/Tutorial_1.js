@@ -28,13 +28,17 @@ const Tutorial_1 = ({navigation}) => {
     <SafeAreaView
       style={{
         flex: FLEX.flex,
-        backgroundColor: COLORS.BgColor,
       }}>
-      <LinearGradient
-        style={{flex: 1, paddingHorizontal: 20}}
-        colors={['#061121', '#061121']}
-        start={{x: 0.1, y: 0.5}}
-        end={{x: 0.1, y: 6.5}}>
+      <Image source={IMAGES.backImage} resizeMode='cover' style ={{
+        height:'100%',
+        width:'100%',
+      }} />
+      <View
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          paddingHorizontal:20,
+        }}>
         <Swiper
           showsButtons={false}
           loop={false}
@@ -144,8 +148,8 @@ const Tutorial_1 = ({navigation}) => {
             <View
               style={{
                 marginTop: height * 0.05,
-                height:height*0.37,
-                width:'100%'
+                height: height * 0.37,
+                width: '100%',
               }}>
               <Image
                 source={IMAGES.frame}
@@ -279,7 +283,7 @@ const Tutorial_1 = ({navigation}) => {
             </View>
           </View>
         </Swiper>
-      </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 };

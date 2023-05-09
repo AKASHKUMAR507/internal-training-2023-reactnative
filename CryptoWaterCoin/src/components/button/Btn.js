@@ -20,7 +20,9 @@ const Btn = ({Press, BgColor, title}) => {
         height: height * 0.075,
         width: '100%',
         borderRadius: SIZES.xxxLarge + 65,
-      }}>
+      }}
+      
+      >
       <LinearGradient
         style={{
           height: '100%',

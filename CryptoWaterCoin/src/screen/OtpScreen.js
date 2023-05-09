@@ -12,7 +12,7 @@ import {
 import {COLORS, FONTFAMILY, FONTSTYLE, IMAGES, SIZES} from '../assets/thems';
 import LinearGradient from 'react-native-linear-gradient';
 
-const OTP_TIMEOUT = 3; // minutes
+const OTP_TIMEOUT = 1; // minutes
 
 const {height, width} = Dimensions.get('screen');
 
@@ -24,17 +24,9 @@ const OtpScreen = ({navigation}) => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const numRegex = /^[0-9]$/;
   const [invalid, setInvalid] = useState(true);
-
-  let otp_Succes_Length = otp.toString().length === 11;
-
-  const styleBgButton = otp_Succes_Length
-    ? {
-        backgroundColor: '#286FDB',
-      }
-    : {
-        backgroundColor: 'rgba(40, 111, 219, 0.5)',
-      };
-
+   
+  let otp_Succes_Length = otp.toString().length === 7;
+   
   // set time to 2 minutes in seconds
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -85,7 +77,7 @@ const OtpScreen = ({navigation}) => {
 
   const handlePress = () => {
     if (OTP.toString() === otp.toString()) {
-      // navigation.navigate('Home');
+      navigation.navigate('Home');
       setInvalid(true);
     } else {
       setInvalid(false);
@@ -196,9 +188,9 @@ const OtpScreen = ({navigation}) => {
               {!invalid && (
                 <Text
                   style={{
-                    color: '#DC3545',
-                    // marginTop: 10,
-                    fontSize: 12,
+                    color: COLORS.error,
+                    fontFamily:FONTFAMILY.roboto,
+                    fontSize:SIZES.medium,
                   }}>
                   Please enter correct OTP.
                 </Text>
@@ -258,7 +250,7 @@ const OtpScreen = ({navigation}) => {
               marginTop: '20%',
             }}>
             <TouchableOpacity
-              style={[styles.submitBUtton, styleBgButton]}
+              style={[styles.submitBUtton]}
               onPress={handlePress}>
               <LinearGradient
                 style={{
@@ -271,8 +263,11 @@ const OtpScreen = ({navigation}) => {
                 colors={[COLORS.c1, COLORS.c2]}>
                 <Text
                   style={{
-                    fontSize: 19,
-                    color: '#FFFFFF',
+                    color: COLORS.white,
+                    fontSize: SIZES.xxLarge,
+                    fontWeight: 'bold',
+                    fontFamily: FONTFAMILY.roboto,
+                    fontStyle: FONTSTYLE.normal,
                   }}>
                   Submit
                 </Text>
@@ -318,7 +313,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   submitBUtton: {
-    backgroundColor: COLORS.c1,
+     
     height: height * 0.075,
     width: '100%',
     borderRadius: SIZES.xxxLarge + 65,
