@@ -48,7 +48,8 @@ const IMAGES = {
   tShirt: require('../images/tshirt.png'),
   waterBottle: require('../images/waterBottle.png'),
   waterBottleCard: require('../images/waterBottleCard.png'),
-  frame : require('../images/Frame.png')
+  frame : require('../images/Frame.png'),
+  backImage : require('../images/backImage.png'),
 };
 
 const ICON = {
@@ -61,6 +62,8 @@ const ICON = {
   wallet: require('../images/icons/Wallet.png'),
   email: require('../images/icons/email.png'),
   lock: require('../images/icons/lock.png'),
+  eye: require('../images/icons/eye.png'),
+  backArrow: require('../images/icons/backBtn.png'),
 };
 
 const FONTWEIGHT = {
