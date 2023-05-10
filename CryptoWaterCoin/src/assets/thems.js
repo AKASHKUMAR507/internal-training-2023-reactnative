@@ -4,6 +4,7 @@ const COLORS = {
   error: '#FF3636',
   placeholder: 'rgba(255,255,255,0.5)',
   paragraph : 'rgba(255, 255, 255, 0.8)',
+  borderColor : 'rgba(255, 255, 255, 0.15)',
   textLink: '#369AF5',
   BgColor: '#061121',
   ternary : '#4A4747',
@@ -84,4 +85,16 @@ const SHADOW = {
   },
 };
 
-export {COLORS, FONTSTYLE, IMAGES, ICON, FONTWEIGHT, SHADOW, SIZES, FLEX, FONTFAMILY};
+
+const validationEmail = email => {
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  return regex.test(email);
+};
+
+const validationPassword = password => {
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  return regex.test(password);
+};
+
+export {validationPassword, validationEmail, COLORS, FONTSTYLE, IMAGES, ICON, FONTWEIGHT, SHADOW, SIZES, FLEX, FONTFAMILY};

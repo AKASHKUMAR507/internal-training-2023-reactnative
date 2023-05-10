@@ -6,6 +6,7 @@ import {
   View,
   Image,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import CheckBox from 'react-native-check-box';
@@ -18,25 +19,78 @@ import {
   IMAGES,
   SHADOW,
   SIZES,
+  validationEmail,
+  validationPassword,
 } from '../assets/thems';
 const {height, width} = Dimensions.get('screen');
 const Login = ({navigation}) => {
   const [isChecked, setIsCkecked] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const emailHandle = text => {
+    setEmail(text);
+
+    if (!text) {
+      setEmailError('Email is required');
+    } else if (!validationEmail(text)) {
+      setEmailError('Please enter valid email address.');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const passwordHandle = text => {
+    setPassword(text);
+
+    if (!text) {
+      setPasswordError('Password is required');
+    } else if (!validationPassword(text)) {
+      setPasswordError('Please enter valid password.');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  // clear input field
+
+  const clearInputField = () => {
+    setEmail('');
+    setPassword('');
+  };
+
+  const handleLogin = () => {
+    if (!email) {
+      setEmailError('Email is required');
+    }  if (!password) {
+      setPasswordError('Password is required');
+    } 
+    if(email && password) {
+      setTimeout(() => {
+        navigation.navigate('Home');
+        clearInputField();
+      }, 1000);
+    }
+  };
+
   return (
     <SafeAreaView
       style={{
         flex: 1,
       }}>
-      <Image source={IMAGES.backImage} resizeMode='contain' />
+      <Image source={IMAGES.backImage} resizeMode="contain" />
       <View
-        style ={{
+        style={{
           position: 'absolute',
-          height:height,
-          width:width,
+          height: height,
+          width: width,
           paddingHorizontal: height * 0.03,
-          zIndex:1,
-        }}
-      >
+          zIndex: 1,
+        }}>
         {/* *************************** Image *********************************** */}
         <View
           style={{
@@ -113,8 +167,16 @@ const Login = ({navigation}) => {
               placeholder="Please enter your email"
               autoComplete={'email'}
               placeholderTextColor={COLORS.placeholder}
-              style={styles.input}
+              style={[
+                styles.input,
+                {borderColor: emailError ? COLORS.error : COLORS.borderColor},
+              ]}
+              value={email}
+              onChangeText={emailHandle}
             />
+            {emailError ? (
+              <Text style={{color: COLORS.error}}>{emailError}</Text>
+            ) : null}
           </View>
           <View
             style={{
@@ -137,8 +199,21 @@ const Login = ({navigation}) => {
               placeholder="Please enter password"
               placeholderTextColor={COLORS.placeholder}
               secureTextEntry={true}
-              style={styles.input}
+              maxLength={16}
+              style={[
+                styles.input,
+                {
+                  borderColor: passwordError
+                    ? COLORS.error
+                    : COLORS.borderColor,
+                },
+              ]}
+              value={password}
+              onChangeText={passwordHandle}
             />
+            {passwordError ? (
+              <Text style={{color: COLORS.error}}>{passwordError}</Text>
+            ) : null}
           </View>
         </View>
 
@@ -195,11 +270,7 @@ const Login = ({navigation}) => {
           style={{
             marginTop: height * 0.03,
           }}>
-          <Btn
-            title={'Login'}
-            BgColor={COLORS.c1}
-            Press={() => navigation.navigate('Home')}
-          />
+          <Btn title={'Login'} BgColor={COLORS.c1} Press={handleLogin} />
         </View>
         {/* *************************** Signup *********************************** */}
         <View
@@ -253,5 +324,6 @@ const styles = StyleSheet.create({
     paddingLeft: SIZES.huge + SIZES.huge,
     color: COLORS.white,
     paddingRight: SIZES.xxLarge,
+    borderWidth: 1,
   },
 });
