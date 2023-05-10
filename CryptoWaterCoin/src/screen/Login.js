@@ -34,6 +34,7 @@ const Login = ({navigation}) => {
           height:height,
           width:width,
           paddingHorizontal: height * 0.03,
+          zIndex:1,
         }}
       >
         {/* *************************** Image *********************************** */}

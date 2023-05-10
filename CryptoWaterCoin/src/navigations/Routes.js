@@ -22,6 +22,7 @@ import BottleReturn from '../screen/BottleReturn';
 import HelpThePlanet from '../screen/HelpThePlanet';
 import Merchandise from '../screen/Merchandise';
 import SignUpScreen from '../screen/SignUpScreen';
+import ForgotOTP from '../screen/ForgotOTP';
 
 
 
@@ -51,6 +52,8 @@ const Routes = () => {
         <Stack.Screen name='BottleReturn' component={BottleReturn}/>
         <Stack.Screen name='HelpThePlanet' component={HelpThePlanet}/>
         <Stack.Screen name='Merchandise' component={Merchandise}/>
+        <Stack.Screen name='ForgotOTP' component={ForgotOTP}/>
+
 
     </Stack.Navigator>
    </NavigationContainer>

@@ -1,6 +1,7 @@
 import {
   Dimensions,
   Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -29,13 +30,10 @@ const SignUpScreen = ({navigation}) => {
   const [isChecked, setIsCkecked] = useState(false);
 
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-        backgroundColor: COLORS.BgColor,
-        paddingHorizontal: height * 0.03,
-      }}>
-      <SafeAreaView>
+    <ImageBackground
+      source={IMAGES.backImage}
+      style={{height: height, width: width, paddingHorizontal: height * 0.03}}>
+      <ScrollView>
         {/* *************************** Logo *************************** */}
         <View
           style={{
@@ -88,7 +86,7 @@ const SignUpScreen = ({navigation}) => {
         {/* *************************** Input Field *************************** */}
         <View
           style={{
-            rowGap: SIZES.xSmall,
+            rowGap: SIZES.xSmall + 5,
             marginTop: height * 0.04,
           }}>
           <View
@@ -149,8 +147,8 @@ const SignUpScreen = ({navigation}) => {
               textInputStyle={styles.textInput}
               codeTextStyle={styles.codeText}
               flagButtonStyle={styles.buttonStyle}
-              countryPickerButtonStyle ={{
-                color:COLORS.white,
+              countryPickerButtonStyle={{
+                color: COLORS.white,
               }}
             />
           </View>
@@ -312,7 +310,7 @@ const SignUpScreen = ({navigation}) => {
             columnGap: 5,
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: height * 0.055,
+            marginBottom: height * 0.16,
           }}>
           <Text
             style={{
@@ -335,8 +333,8 @@ const SignUpScreen = ({navigation}) => {
             Login
           </Text>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
@@ -390,7 +388,7 @@ const styles = StyleSheet.create({
 
     paddingVertical: 0,
     backgroundColor: 'rgba(255,255,255,0.15)',
-    borderLeftWidth:2,
+    borderLeftWidth: 2,
     borderLeftColor: '#615858',
   },
   textInput: {
