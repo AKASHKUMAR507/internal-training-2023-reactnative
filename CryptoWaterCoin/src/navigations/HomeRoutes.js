@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screen/Home/Home';
 import {COLORS, FONTWEIGHT, SIZES} from '../assets/thems';
- 
+
 import Redeem from '../screen/Home/Redeem';
 import Wallet from '../screen/Home/Wallet';
 import Products from '../screen/Home/Products';
@@ -14,6 +14,7 @@ const HomeRoutes = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+ 
       }}
       tabBarOptions={{
         showLabel: false,
@@ -24,15 +25,6 @@ const HomeRoutes = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              {/* <Image source={ICONS.home}
-              resizeMode= 'contain'
-              style ={{
-                height:17,
-                width:19,
-                tintColor: focused ? COLORS.primary : COLORS.primary
-                
-              }}
-            /> */}
               <Text
                 style={{
                   color: focused ? COLORS.primary : COLORS.primary,

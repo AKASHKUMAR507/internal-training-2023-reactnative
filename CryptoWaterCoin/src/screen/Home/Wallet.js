@@ -11,6 +11,7 @@ const {height, width} = Dimensions.get('screen');
 
 const Wallet = () => {
   return (
+    
     <ImageBackground
       source={IMAGES.backImage}
       style={{
