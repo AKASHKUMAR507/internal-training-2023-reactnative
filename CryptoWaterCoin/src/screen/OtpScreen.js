@@ -24,9 +24,9 @@ const OtpScreen = ({navigation}) => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const numRegex = /^[0-9]$/;
   const [invalid, setInvalid] = useState(true);
-   
+
   let otp_Succes_Length = otp.toString().length === 7;
-   
+
   // set time to 2 minutes in seconds
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -183,14 +183,15 @@ const OtpScreen = ({navigation}) => {
             }}>
             <View
               style={{
-                width: '50%',
+                width: width * 0.5,
+                alignItems: 'center',
               }}>
               {!invalid && (
                 <Text
                   style={{
                     color: COLORS.error,
-                    fontFamily:FONTFAMILY.roboto,
-                    fontSize:SIZES.medium,
+                    fontFamily: FONTFAMILY.roboto,
+                    fontSize: SIZES.medium,
                   }}>
                   Please enter correct OTP.
                 </Text>
@@ -298,6 +299,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 29,
     fontWeight: 'bold',
+    color:COLORS.black,
     borderWidth: 1,
     borderRadius: SIZES.xxLarge,
     width: '21.5%',
@@ -313,7 +315,6 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   submitBUtton: {
-     
     height: height * 0.075,
     width: '100%',
     borderRadius: SIZES.xxxLarge + 65,

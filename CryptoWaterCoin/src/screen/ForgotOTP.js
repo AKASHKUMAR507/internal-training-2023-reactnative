@@ -183,7 +183,8 @@ const ForgotOTP = ({navigation}) => {
             }}>
             <View
               style={{
-                width: '50%',
+                width: width * 0.5,
+                alignItems:'center',
               }}>
               {!invalid && (
                 <Text
@@ -299,6 +300,7 @@ const styles = StyleSheet.create({
     fontSize: 29,
     fontWeight: 'bold',
     borderWidth: 1,
+    color:COLORS.black,
     borderRadius: SIZES.xxLarge,
     width: '21.5%',
     height: height * 0.075,

@@ -11,16 +11,16 @@ import {
 import React, {useState} from 'react';
 import CheckBox from 'react-native-check-box';
 import Btn from '../components/button/Btn';
+import {validationPassword, validationEmail} from '../components/Validation';
 import {
   COLORS,
   FONTFAMILY,
   FONTSTYLE,
+  FONTWEIGHT,
   ICON,
   IMAGES,
   SHADOW,
   SIZES,
-  validationEmail,
-  validationPassword,
 } from '../assets/thems';
 const {height, width} = Dimensions.get('screen');
 const Login = ({navigation}) => {
@@ -66,15 +66,17 @@ const Login = ({navigation}) => {
   const handleLogin = () => {
     if (!email) {
       setEmailError('Email is required');
-    }  if (!password) {
+    }
+    if (!password) {
       setPasswordError('Password is required');
-    } 
-    if(email && password) {
+    }
+    if (email && password && !emailError && !passwordError) {
       setTimeout(() => {
-        navigation.navigate('Home');
+        navigation.navigate('HomeRoutes');
         clearInputField();
       }, 1000);
     }
+    // navigation.navigate('Home');
   };
 
   return (
@@ -157,7 +159,7 @@ const Login = ({navigation}) => {
                 width: 20,
                 height: 20,
                 position: 'absolute',
-                marginTop: 49,
+                marginTop: 45,
                 zIndex: 1,
                 marginLeft: 25,
               }}
@@ -175,7 +177,7 @@ const Login = ({navigation}) => {
               onChangeText={emailHandle}
             />
             {emailError ? (
-              <Text style={{color: COLORS.error}}>{emailError}</Text>
+              <Text style={styles.errorText}>{emailError}</Text>
             ) : null}
           </View>
           <View
@@ -189,7 +191,7 @@ const Login = ({navigation}) => {
                 width: 20,
                 height: 20,
                 position: 'absolute',
-                marginTop: 48,
+                marginTop: 45,
                 zIndex: 1,
                 marginLeft: 25,
               }}
@@ -212,7 +214,7 @@ const Login = ({navigation}) => {
               onChangeText={passwordHandle}
             />
             {passwordError ? (
-              <Text style={{color: COLORS.error}}>{passwordError}</Text>
+              <Text style={styles.errorText}>{passwordError}</Text>
             ) : null}
           </View>
         </View>
@@ -324,6 +326,15 @@ const styles = StyleSheet.create({
     paddingLeft: SIZES.huge + SIZES.huge,
     color: COLORS.white,
     paddingRight: SIZES.xxLarge,
+    // ...SHADOW.shadowBox,
     borderWidth: 1,
+  },
+  errorText: {
+    color: COLORS.error,
+    fontSize: SIZES.medium + 1,
+    fontFamily: FONTFAMILY.roboto,
+    fontStyle: FONTSTYLE.normal,
+    fontWeight: FONTWEIGHT.medium,
+    marginLeft:SIZES.medium,
   },
 });

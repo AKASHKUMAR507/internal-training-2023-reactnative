@@ -83,18 +83,24 @@ const SHADOW = {
     shadowRadius: 10,
     elevation: 2,
   },
+  shadowBox: {
+    // position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: -5,
+      height: 7,
+    },
+    shadowRadius: 11,
+    shadowOpacity: 0.19,
+  },
 };
 
 
-const validationEmail = email => {
-  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  return regex.test(email);
-};
 
-const validationPassword = password => {
-  const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-  return regex.test(password);
-};
 
-export {validationPassword, validationEmail, COLORS, FONTSTYLE, IMAGES, ICON, FONTWEIGHT, SHADOW, SIZES, FLEX, FONTFAMILY};
+export {COLORS, FONTSTYLE, IMAGES, ICON, FONTWEIGHT, SHADOW, SIZES, FLEX, FONTFAMILY};

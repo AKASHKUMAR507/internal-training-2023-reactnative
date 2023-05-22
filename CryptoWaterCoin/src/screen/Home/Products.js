@@ -6,23 +6,21 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+
 import {IMAGES} from '../../assets/thems';
-import SideDrawer from '../../navigations/SideDrawer';
 const {height, width} = Dimensions.get('screen');
 
-const Home = () => {
+const Products = () => {
   return (
     <ImageBackground
       source={IMAGES.backImage}
       style={{
         height: height,
         width: width,
-      }}>
-        
-      </ImageBackground>
+      }}></ImageBackground>
   );
 };
 
-export default Home;
+export default Products;
 
 const styles = StyleSheet.create({});

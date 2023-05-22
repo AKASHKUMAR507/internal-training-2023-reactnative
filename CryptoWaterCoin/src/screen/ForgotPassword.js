@@ -7,7 +7,7 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FLEX,
   IMAGES,
@@ -16,11 +16,41 @@ import {
   SIZES,
   ICON,
   COLORS,
+  FONTWEIGHT,
 } from '../assets/thems';
 import Btn from '../components/button/Btn';
+import { validationEmail } from '../components/Validation';
 const {height, width} = Dimensions.get('screen');
 
 const ForgotPassword = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+
+
+  const handleEmail = (text) =>{
+    setEmail(text);
+
+    if (!text) {
+      setEmailError('Email is required');
+    } else if (!validationEmail(text)) {
+      setEmailError('Please enter valid email address.');
+    } else {
+      setEmailError('');
+    }
+  }
+
+  const handleSendOTP = () =>{
+    if(!email){
+      setEmailError('Email is Required')
+    }
+
+    if(email && !emailError){
+      navigation.navigate('ForgotOTP');
+      setEmail('')
+    }
+  }
+  
   return (
     <ImageBackground
       source={IMAGES.backImage}
@@ -94,7 +124,7 @@ const ForgotPassword = ({navigation}) => {
               width: 20,
               height: 20,
               position: 'absolute',
-              marginTop: 49,
+              marginTop: 45,
               zIndex: 1,
               marginLeft: 25,
             }}
@@ -104,8 +134,15 @@ const ForgotPassword = ({navigation}) => {
             placeholder="Please enter your email"
             autoComplete={'email'}
             placeholderTextColor={COLORS.placeholder}
-            style={styles.input}
+            style={[styles.input, 
+              {borderColor: emailError ? COLORS.error : COLORS.borderColor}
+            ]}
+            value={email}
+            onChangeText={handleEmail}
           />
+          {emailError ? (
+            <Text style={styles.errorText}>{emailError}</Text>
+          ) : null}
         </View>
       </View>
       {/* *************************** Button *********************************** */}
@@ -116,7 +153,7 @@ const ForgotPassword = ({navigation}) => {
         <Btn
           title={'Send OTP'}
           BgColor={COLORS.c1}
-          Press={() => navigation.navigate('ForgotOTP')}
+          Press={handleSendOTP}
         />
       </View>
       {/* *************************** Signup *********************************** */}
@@ -159,5 +196,14 @@ const styles = StyleSheet.create({
     paddingLeft: SIZES.huge + SIZES.huge,
     color: COLORS.white,
     paddingRight: SIZES.xxLarge,
+    borderWidth:1,
+  },
+  errorText: {
+    color: COLORS.error,
+    fontSize: SIZES.medium + 1,
+    fontFamily: FONTFAMILY.roboto,
+    fontStyle: FONTSTYLE.normal,
+    fontWeight: FONTWEIGHT.medium,
+    marginLeft:SIZES.medium,
   },
 });
