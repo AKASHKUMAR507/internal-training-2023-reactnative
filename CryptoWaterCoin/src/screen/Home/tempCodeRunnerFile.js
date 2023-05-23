@@ -1,0 +1,6 @@
+ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,

@@ -8,14 +8,11 @@ import Tutorial_1 from '../screen/tutorial/Tutorial_1';
 import Tutorial_2 from '../screen/tutorial/Tutorial_2';
 import Tutorial_3 from '../screen/tutorial/Tutorial_3';
 import Login from '../screen/Login';
-
 import ForgotPassword from '../screen/ForgotPassword';
 import OtpScreen from '../screen/OtpScreen';
 import OurTeam from '../screen/OurTeam';
-
 import WhereToBuy from '../screen/WhereToBuy';
 import PartnerWithUs from '../screen/PartnerWithUs';
-
 import RedeemScreen from '../screen/RedeemScreen';
 import Careers from '../screen/Careers';
 import BottleReturn from '../screen/BottleReturn';
@@ -33,7 +30,7 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="HomeRoutes"
+        initialRouteName="Merchandise"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Tutorial_1" component={Tutorial_1} />

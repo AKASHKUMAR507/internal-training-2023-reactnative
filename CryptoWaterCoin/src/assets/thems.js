@@ -51,6 +51,9 @@ const IMAGES = {
   waterBottleCard: require('../images/waterBottleCard.png'),
   frame : require('../images/Frame.png'),
   backImage : require('../images/backImage.png'),
+  coins : require('../images/coins.png'),
+  bottal : require('../images/cardBottal.png'),
+  tshirtCard : require('../images/tshirtCard.png'),
 };
 
 const ICON = {
@@ -65,6 +68,8 @@ const ICON = {
   lock: require('../images/icons/lock.png'),
   eye: require('../images/icons/eye.png'),
   backArrow: require('../images/icons/backBtn.png'),
+  menu: require('../images/icons/menu.png'),
+  profile: require('../images/icons/profiles.png'),
 };
 
 const FONTWEIGHT = {

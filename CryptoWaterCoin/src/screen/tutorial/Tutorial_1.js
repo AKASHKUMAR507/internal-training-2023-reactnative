@@ -50,7 +50,9 @@ const Tutorial_1 = ({navigation}) => {
             width: 20,
             marginBottom: '28%',
           }}
-          activeDotColor={COLORS.dotActiveColor}>
+          activeDotColor={COLORS.dotActiveColor}
+          
+          >
           {/* *************************************************************** */}
           <View>
             <View
