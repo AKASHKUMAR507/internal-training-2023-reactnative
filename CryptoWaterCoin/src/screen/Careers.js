@@ -1,83 +1,74 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
-import Swiper from 'react-native-swiper';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
-const { width } = Dimensions.get('window');
+const Card = ({ logo, name, text }) => {
+  return (
+    <View style={styles.__cardContainer}>
+      <View style={styles.__cardContent}>
+        <View style={styles.__logoContainer}>
+          <Image source={logo} style={styles.logo} />
+          <Text style={styles.__logoName}>{name}</Text>
+        </View>
+        <Text style={styles.__cardText}>{text}</Text>
+      </View>
+    </View>
+  );
+};
 
 const Careers = () => {
-  const renderItems = () => {
-    // Dummy data for the items
-    const items = [
-      { id: 1, text: 'Item 1' },
-      { id: 2, text: 'Item 2' },
-      { id: 3, text: 'Item 3' },
-    ];
-
-    return items.map((item) => (
-      <View key={item.id} style={styles.itemContainer}>
-        {/* Render the item */}
-        <Text style={styles.itemText}>{item.text}</Text>
-      </View>
-    ));
-  };
-
   return (
-    <View style={styles.container}>
-      <Swiper
-        loop={false}
-        index={1}
-        showsPagination
-        dotStyle={styles.dotStyle}
-        activeDotStyle={styles.activeDotStyle}
-        style={styles.swiper}
-        contentContainerStyle={styles.swiperContentContainer}
-        containerStyle={styles.swiperContainer}
-      >
-        {renderItems()}
-      </Swiper>
+    <View style={styles.__container}>
+      <View style={styles.__cardRow}>
+        <Card logo={require('../images/icons/scan.png')} name="Logo 1 Name" text="Text 1" />
+        <Card logo={require('../images/icons/scan.png')} name="Logo 2 Name" text="Text 2" />
+      </View>
+      <View style={styles.__cardRow}>
+        <Card logo={require('../images/icons/scan.png')} name="Logo 3 Name" text="Text 3" />
+        <Card logo={require('../images/icons/scan.png')} name="Logo 4 Name" text="Text 4" />
+      </View>
+      <View style={styles.__cardRow}>
+        <Card logo={require('../images/icons/scan.png')} name="Logo 5 Name" text="Text 5" />
+        <Card logo={require('../images/icons/scan.png')} name="Logo 6 Name" text="Text 6" />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  __container: {
     flex: 1,
+    padding: 16,
   },
-  swiperContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  __cardRow: {
+    flexDirection: 'row',
+    marginBottom: 16,
   },
-  swiperContentContainer: {
-    alignItems: 'center',
-  },
-  swiper: {
-    height: 200,
-  },
-  itemContainer: {
-    width: width * 0.8,
-    height: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'lightgray',
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  itemText: {
-    fontSize: 20,
-  },
-  dotStyle: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+  __cardContainer: {
+    flex: 1,
     backgroundColor: 'gray',
-    margin: 4,
+    borderRadius: 8,
+    marginRight: 16,
+    overflow: 'hidden',
   },
-  activeDotStyle: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: 'black',
-    margin: 4,
+  __cardContent: {
+    padding: 16,
+  },
+  __logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  __logo: {
+    width: 24,
+    height: 24,
+    marginRight: 8,
+  },
+  __logoName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  __cardText: {
+    fontSize: 14,
   },
 });
 

@@ -24,15 +24,21 @@ import Btn from '../components/button/Btn';
 
 const {height, width} = Dimensions.get('screen');
 
-const Merchandise = () => {
+const Merchandise = ({navigation}) => {
   const [showAllCards, setShowAllCards] = useState(false);
 
   const cards = [
     {id: 1, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
     {id: 2, title: 'Water Bottle', image: require('../images/cardBottal.png')},
     {id: 3, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
-    {id: 2, title: 'Water Bottle', image: require('../images/cardBottal.png')},
-    {id: 3, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 4, title: 'Water Bottle', image: require('../images/cardBottal.png')},
+    {id: 5, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 6, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 7, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 8, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 9, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 10, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
+    {id: 11, title: 'T-Shirt', image: require('../images/tshirtCard.png')},
   ];
 
   const renderCards = () => {
@@ -56,7 +62,7 @@ const Merchandise = () => {
     } else {
       return (
         <ScrollView horizontal>
-          {cards.slice(0, 2).map(card => (
+          {cards.slice(0, 10).map(card => (
             <View key={card.id} style={styles.card}>
               <View
                 style={{
@@ -78,7 +84,7 @@ const Merchandise = () => {
       source={IMAGES.backImage}
       style={{
         flex: 1,
-        paddingHorizontal: 20,
+        // paddingHorizontal: 20,
       }}>
       <View
         style={{
@@ -88,9 +94,10 @@ const Merchandise = () => {
           alignItems: 'flex-start',
           columnGap: width * 0.2,
           alignItems: 'center',
+          paddingHorizontal: 20,
         }}>
         <View style={{}}>
-          <BackBtn Press={() => navigation.navigate('')} />
+          <BackBtn Press={() => navigation.navigate('HomeRoutes')} />
         </View>
         <Text
           style={{
@@ -102,11 +109,12 @@ const Merchandise = () => {
           Merchandise
         </Text>
       </View>
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
-            marginTop: height * 0.015,
+            marginTop: height * 0.02,
             rowGap: 5,
+            paddingHorizontal: 20,
           }}>
           <Text style={[styles.h1]}>
             Method Of Purchasing By Credit Card And Dropcoin
@@ -119,23 +127,19 @@ const Merchandise = () => {
 
         <Swiper
           showsButtons={false}
-          loop={false}
+          loop={true}
+          autoplay= {true}
+          autoplayTimeout={3}
+          // autoplayDirection = {true}
           dotStyle={{}}
           dotColor={COLORS.ternary}
           activeDotStyle={{}}
           activeDotColor={COLORS.dotActiveColor}
           style={{
             height: height * 0.37,
-            marginTop: height * 0.025,
+            marginTop: height * 0.03,
           }}>
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: COLORS.c1,
-              borderRadius: SIZES.small,
-              rowGap: 20,
-              paddingTop:30,
-            }}>
+          <View style={styles.slides}>
             <View
               style={{
                 justifyContent: 'center',
@@ -175,14 +179,7 @@ const Merchandise = () => {
               </LinearGradient>
             </TouchableOpacity>
           </View>
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: COLORS.c1,
-              borderRadius: SIZES.small,
-              rowGap: 20,
-              paddingTop:30,
-            }}>
+          <View style={styles.slides}>
             <View
               style={{
                 justifyContent: 'center',
@@ -223,14 +220,7 @@ const Merchandise = () => {
               </LinearGradient>
             </TouchableOpacity>
           </View>
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: COLORS.c1,
-              borderRadius: SIZES.small,
-              rowGap: 20,
-              paddingTop:30,
-            }}>
+          <View style={styles.slides}>
             <View
               style={{
                 justifyContent: 'center',
@@ -276,7 +266,7 @@ const Merchandise = () => {
         <View
           style={{
             width: '100%',
-            paddingHorizontal: 10,
+            paddingHorizontal: 20,
           }}>
           <Text style={[styles.text]}>
             Show off your love for Crypto Water with our exclusive merchandize
@@ -297,6 +287,7 @@ const Merchandise = () => {
         <View
           style={{
             marginTop: height * 0.03,
+            paddingHorizontal: 20,
           }}>
           <Btn title={'Contact Us'} />
         </View>
@@ -308,6 +299,7 @@ const Merchandise = () => {
             justifyContent: 'space-between',
             marginTop: height * 0.03,
             marginBottom: height * 0.03,
+            paddingHorizontal: 20,
           }}>
           <Text
             style={{
@@ -368,9 +360,7 @@ const styles = StyleSheet.create({
     color: COLORS.c1,
   },
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    paddingLeft: 20,
   },
   cardContainer: {
     height: 290,
@@ -409,5 +399,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
+  },
+  slides: {
+    borderWidth: 1,
+    borderColor: COLORS.c1,
+    borderRadius: SIZES.small,
+    rowGap: 20,
+    paddingTop: 30,
+    marginRight: 10,
+    marginLeft: 20,
+    width: width * 0.9,
   },
 });

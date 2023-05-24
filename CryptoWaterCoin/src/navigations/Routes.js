@@ -30,7 +30,7 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Merchandise"
+        initialRouteName="HomeRoutes"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Tutorial_1" component={Tutorial_1} />

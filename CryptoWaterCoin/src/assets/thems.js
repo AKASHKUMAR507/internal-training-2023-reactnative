@@ -12,6 +12,7 @@ const COLORS = {
   c1 : 'rgba(81, 210, 252, 1)',
   c2 : 'rgba(0, 153, 220, 1)',
   c3 : 'rgba(0, 153, 220, 3)',
+  primary: '#7C7777',
 };
 
 const FONTSTYLE = {
@@ -70,6 +71,8 @@ const ICON = {
   backArrow: require('../images/icons/backBtn.png'),
   menu: require('../images/icons/menu.png'),
   profile: require('../images/icons/profiles.png'),
+  redeem: require('../images/icons/redeem.png'),
+  blockchain: require('../images/icons/blockchain.png'),
 };
 
 const FONTWEIGHT = {

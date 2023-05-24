@@ -9,19 +9,26 @@ import Redeem from '../screen/Home/Redeem';
 import Wallet from '../screen/Home/Wallet';
 import Products from '../screen/Home/Products';
 import LinearGradient from 'react-native-linear-gradient';
+
 const HomeRoutes = () => {
   const Tab = createBottomTabNavigator();
+
+  const screenOptions = {
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarStyle: {
+      bottom: 0,
+      right: 0,
+      left: 0,
+      elevation: 0,
+      height: 65,
+      borderTopLeftRadius: -40,
+      borderTopRightRadius: -40,
+      overflow: 'hidden',
+    },
+  };
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerShown: false,
-      }}
-      tabBarOptions={{
-        showLabel: false,
-        // labe
-        style: {padding: 10 , height: 70},
-      }}>
+    <Tab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
       <Tab.Screen
         name="Home"
         component={Home}

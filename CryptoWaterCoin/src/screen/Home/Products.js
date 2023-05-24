@@ -7,10 +7,10 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React from 'react';
-import {COLORS, IMAGES} from '../../assets/thems';
+import {COLORS, IMAGES, SIZES} from '../../assets/thems';
 const {height, width} = Dimensions.get('screen');
 
-const Products = () => {
+const Products = ({navigation}) => {
   return (
     <SafeAreaView
       style={{
@@ -31,13 +31,19 @@ const Products = () => {
       <View
         style={{
           position: 'absolute',
-          zIndex: 1,
+          // zIndex: 1,
+          justifyContent:'center',
+          alignItems:'center',
+          alignSelf:'center',
+          marginTop:'50%'
         }}>
         <Text
+        onPress={()=> navigation.navigate('Merchandise')}
           style={{
             color: 'white',
+            fontSize:SIZES.huge,
           }}>
-          Products
+          Navigate....
         </Text>
          
       </View>

@@ -304,6 +304,10 @@ const Login = ({navigation}) => {
             Sign Up
           </Text>
         </View>
+        <Text onPress={()=>navigation.navigate('Merchandise')} style = {{
+          color:COLORS.white
+        }}>go</Text>
+        {/* <Text onPress={navigation.navigate('Careers')}>go</Text> */}
       </View>
     </SafeAreaView>
   );
