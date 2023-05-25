@@ -36,6 +36,8 @@ const Products = ({navigation}) => {
           alignItems:'center',
           alignSelf:'center',
           marginTop:'50%'
+          // borderTopLeftRadius,
+          
         }}>
         <Text
         onPress={()=> navigation.navigate('Merchandise')}

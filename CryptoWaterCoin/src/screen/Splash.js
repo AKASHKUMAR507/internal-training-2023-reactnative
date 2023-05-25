@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {COLORS, FLEX, IMAGES} from '../assets/thems';
 const {height, width} = Dimensions.get('screen');
 const Splash = ({navigation}) => {
+
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('Tutorial_1');
@@ -19,6 +20,7 @@ const Splash = ({navigation}) => {
         alignContent: 'center',
         alignItems: 'center',
       }}>
+      
       <Image source={IMAGES.backImage} resizeMode='contain' />
       <View style={{
           position: 'absolute',
