@@ -7,6 +7,8 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ImageBackground,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {IMAGES, ICONS, FONTS, SIZES, COLORS} from '../../assets/Themes';
@@ -27,6 +29,7 @@ const Login = ({navigation}) => {
   const [phoneError, setPhoneError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [themes, setThemes] = useState('email');
   const [trueValue, setTrueValue] = useState('');
@@ -44,9 +47,9 @@ const Login = ({navigation}) => {
     setEmail(text);
     setTrueValue(text);
     if (!text) {
-      setEmailError('Email is required');
+      setEmailError('Email is required.');
     } else if (!validationEmail(text)) {
-      setEmailError('Please enter valid email address.');
+      setEmailError('Please enter valid email.');
     } else {
       setEmailError('');
     }
@@ -55,7 +58,7 @@ const Login = ({navigation}) => {
     setPhone(text);
     setTrueValue(text);
     if (!text) {
-      setPhoneError('Phone is required.');
+      setPhoneError('Mobile number is required.');
     } else if (!validationPhone(text)) {
       setPhoneError('Please enter valid mobile number.');
     } else {
@@ -67,9 +70,11 @@ const Login = ({navigation}) => {
     setPassword(text);
 
     if (!text) {
-      setPasswordError('Password is required');
+      setPasswordError('Password is required.');
     } else if (!validationPassword(text)) {
-      setPasswordError('Please enter valid password.');
+      setPasswordError(
+        'Password must be at least 8 characters including one upper case, one lower case, onealphanumeric and one special character.',
+      );
     } else {
       setPasswordError('');
     }
@@ -80,325 +85,381 @@ const Login = ({navigation}) => {
     setPassword('');
   };
   const handleLogin = () => {
-    navigation.navigate('OTP_Screen', {data});
-
-    // if (themes === 'email') {
-    //   if (!email) {
-    //     setEmailError('Email is required');
-    //   }
-    //   if (!password) {
-    //     setPasswordError('Password is required');
-    //   }
-    //   if (email && password && !emailError && !passwordError) {
-    //     setTimeout(() => {
-    //       navigation.navigate('OTP_Screen');
-    //       clearInputField();
-    //     }, 1000);
-    //   }
-    // } else {
-    //   if (!phone) {
-    //     setPhoneError('Phone is required.');
-    //   }
-    //   if (!password) {
-    //     setPasswordError('Password is required');
-    //   }
-    //   if (phone && password && !phoneError && !passwordError) {
-    //     setTimeout(() => {
-    //       navigation.navigate('OTP_Screen');
-    //       clearInputField();
-    //     }, 1000);
-    //   }
-    // }
+    if (themes === 'email') {
+      if (!email) {
+        setEmailError('Email is required.');
+      }
+      if (!password) {
+        setPasswordError('Password is required.');
+      }
+      if (email && password && !emailError && !passwordError) {
+        setTimeout(() => {
+          navigation.navigate('OTP_Screen', {data});
+          clearInputField();
+        }, 500);
+      }
+    } else {
+      if (!phone) {
+        setPhoneError('Mobile number is required.');
+      }
+      if (!password) {
+        setPasswordError('Password is required.');
+      }
+      if (phone && password && !phoneError && !passwordError) {
+        setTimeout(() => {
+          navigation.navigate('OTP_Screen', {data});
+          clearInputField();
+        }, 500);
+      }
+    }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* *************************** container *************************** */}
-      <View style={styles.main}>
-        {/* ************************ logo *********************** */}
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: height * 0.06,
-            width: '100%',
-          }}>
-          <Image source={ICONS._app_logo} resizeMode="contain" style={{}} />
-        </View>
-        {/* ************************ heading *********************** */}
-        <View
-          style={{
-            marginTop: height * 0.02,
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingVertical: 10,
-            rowGap: 6,
-          }}>
-          <Text
-            allowFontScaling={true}
-            style={{
-              fontSize: SIZES._xLarge,
-              fontFamily: FONTS._class_display_Medium,
-              color: COLORS._black,
-            }}>
-            Welcome Back
-          </Text>
-          <Text
-            allowFontScaling={true}
-            style={{
-              color: COLORS._gray,
-              fontSize: SIZES._xxMedium + 2,
-              fontFamily: FONTS._poppins_regular,
-            }}>
-            Sign to continue
-          </Text>
-        </View>
-        {/* ************************ Button *********************** */}
-        <View
-          style={{
-            width: '100%',
-            paddingHorizontal: 70,
-            marginTop: height * 0.05,
-          }}>
-          <View
-            style={{
-              backgroundColor: COLORS._input_bg,
-              height: height * 0.065,
-              borderRadius: 50,
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              borderWidth: 2,
-              borderColor: COLORS._input_border,
-              paddingVertical: 2,
-              paddingHorizontal: 2,
-            }}>
-            <TouchableOpacity
-              onPress={handlePressDay}
-              style={[
-                styles.themesSwipe,
-                {
-                  backgroundColor:
-                    themes === 'email' ? COLORS._red : COLORS._input_bg,
-                },
-              ]}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{flex: 1, backgroundColor: COLORS._white}}>
+      <ImageBackground
+        source={IMAGES._loginbackground}
+        resizeMode="cover"
+        style={{flex: 1}}>
+        <SafeAreaView style={styles.container}>
+          {/* *************************** container *************************** */}
+          <View style={styles.main}>
+            {/* ************************ logo *********************** */}
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: height * 0.06,
+                width: '100%',
+              }}>
+              <Image source={ICONS._app_logo} resizeMode="contain" style={{}} />
+            </View>
+            {/* ************************ heading *********************** */}
+            <View
+              style={{
+                marginTop: height * 0.02,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 10,
+                rowGap: 6,
+              }}>
               <Text
                 allowFontScaling={true}
                 style={{
-                  color:
-                    themes === 'email' ? COLORS._white : COLORS._buttom_text,
-                  fontSize: SIZES._small,
-                  fontFamily: FONTS._poppins_regular,
+                  fontSize: SIZES._xLarge,
+                  fontFamily: FONTS._class_display_Medium,
+                  color: COLORS._black,
                 }}>
-                Email
+                Welcome Back
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={handlePressNight}
-              style={[
-                styles.themesSwipe,
-                {
-                  backgroundColor:
-                    themes === 'phone' ? COLORS._red : COLORS._input_bg,
-                },
-              ]}>
               <Text
                 allowFontScaling={true}
                 style={{
-                  color:
-                    themes === 'phone' ? COLORS._white : COLORS._buttom_text,
-                  fontSize: SIZES._small,
+                  color: COLORS._gray,
+                  fontSize: SIZES._xxMedium + 2,
                   fontFamily: FONTS._poppins_regular,
                 }}>
-                Mobile
+                Sign to continue
               </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        {/* ************************ Input Field *********************** */}
-        <View
-          style={{
-            rowGap: SIZES._xxLarge,
-            marginTop: height * 0.04,
-          }}>
-          {themes === 'email' ? (
-            <View style={{}}>
-              <View style={styles.icons}>
-                <Image
-                  source={ICONS._email}
-                  style={styles.icons_styles}
-                  resizeMode="contain"
+            </View>
+            {/* ************************ Button *********************** */}
+            <View
+              style={{
+                width: '100%',
+                paddingHorizontal: 70,
+                marginTop: height * 0.05,
+              }}>
+              <View
+                style={{
+                  backgroundColor: COLORS._input_bg,
+                  height: height * 0.065,
+                  borderRadius: 50,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  borderWidth: 2,
+                  borderColor: COLORS._input_border,
+                  paddingVertical: 2,
+                  paddingHorizontal: 2,
+                }}>
+                <TouchableOpacity
+                  onPress={handlePressDay}
+                  style={[
+                    styles.themesSwipe,
+                    {
+                      backgroundColor:
+                        themes === 'email' ? COLORS._red : COLORS._input_bg,
+                    },
+                  ]}>
+                  <Text
+                    allowFontScaling={true}
+                    style={{
+                      color:
+                        themes === 'email'
+                          ? COLORS._white
+                          : COLORS._buttom_text,
+                      fontSize: SIZES._small,
+                      fontFamily: FONTS._poppins_regular,
+                    }}>
+                    Email
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handlePressNight}
+                  style={[
+                    styles.themesSwipe,
+                    {
+                      backgroundColor:
+                        themes === 'phone' ? COLORS._red : COLORS._input_bg,
+                    },
+                  ]}>
+                  <Text
+                    allowFontScaling={true}
+                    style={{
+                      color:
+                        themes === 'phone'
+                          ? COLORS._white
+                          : COLORS._buttom_text,
+                      fontSize: SIZES._small,
+                      fontFamily: FONTS._poppins_regular,
+                    }}>
+                    Mobile
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* ************************ Input Field *********************** */}
+            <View
+              style={{
+                rowGap: 8,
+                marginTop: height * 0.04,
+              }}>
+              {themes === 'email' ? (
+                <>
+                  <View style={{}}>
+                    <View style={styles.icons}>
+                      <Image
+                        tintColor={COLORS._red}
+                        source={ICONS._email}
+                        style={styles.icons_styles}
+                        resizeMode="contain"
+                      />
+                    </View>
+                    <View style={styles.lines}></View>
+                    <TextInput
+                      placeholder="Email"
+                      autoComplete={'email'}
+                      placeholderTextColor={COLORS._placeholder}
+                      style={[
+                        styles.input,
+                        {
+                          borderColor: emailError
+                            ? COLORS._red
+                            : COLORS._input_border,
+                        },
+                      ]}
+                      value={email}
+                      onChangeText={emailHandle}
+                    />
+                  </View>
+                  {emailError ? (
+                    <Text style={styles.errorText}>{emailError}</Text>
+                  ) : null}
+                </>
+              ) : (
+                <>
+                  <View style={{}}>
+                    <PhoneInput
+                      style={[
+                        styles.phone_input,
+                        {
+                          borderColor: phoneError
+                            ? COLORS._red
+                            : COLORS._input_border,
+                        },
+                      ]}
+                      placeholder="Mobile number"
+                      placeholderTextColor="red"
+                      containerStyle={[
+                        styles.phoneInputContainer,
+                        {
+                          borderColor: phoneError
+                            ? COLORS._red
+                            : COLORS._input_border,
+                        },
+                      ]}
+                      textContainerStyle={styles.textInputContainer}
+                      textInputStyle={styles.textInput}
+                      codeTextStyle={styles.codeText}
+                      flagButtonStyle={styles.buttonStyle}
+                      countryPickerButtonStyle={{
+                        color: COLORS._white,
+                      }}
+                      value={phone}
+                      onChangeText={phoneHandle}
+                    />
+                  </View>
+                  {phoneError ? (
+                    <Text style={styles.errorText}>{phoneError}</Text>
+                  ) : null}
+                </>
+              )}
+
+              <View
+                style={{
+                  marginTop: SIZES._medium,
+                }}>
+                <View style={styles.icons}>
+                  <Image
+                    tintColor={COLORS._red}
+                    source={ICONS._lock}
+                    style={[styles.icons_styles,styles.rotate]}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={styles.lines}></View>
+
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    zIndex: 2,
+                    height: 30,
+                    width: 30,
+                    top: '25%',
+                    marginLeft: '87%',
+                  }}>
+                  {showPassword == true ? (
+                    <Image
+                      tintColor={COLORS._otpBox}
+                      source={ICONS._eye}
+                      resizeMode="contain"
+                      style={{
+                        height: 20,
+                        width: 20,
+                      }}
+                    />
+                  ) : (
+                    <Image
+                      tintColor={COLORS._otpBox}
+                      source={ICONS._eyeHide}
+                      resizeMode="contain"
+                      style={{
+                        height: 20,
+                        width: 20,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
+
+                <TextInput
+                  placeholder="Password"
+                  placeholderTextColor={COLORS._placeholder}
+                  secureTextEntry={!showPassword}
+                  maxLength={16}
+                  style={[
+                    styles.input,
+                    {
+                      borderColor: passwordError
+                        ? COLORS._red
+                        : COLORS._input_border,
+                    },
+                  ]}
+                  value={password}
+                  onChangeText={passwordHandle}
                 />
               </View>
-              <View style={styles.lines}></View>
-              <TextInput
-                placeholder="Email"
-                autoComplete={'email'}
-                placeholderTextColor={COLORS._placeholder}
-                style={[
-                  styles.input,
-                  {
-                    borderColor: emailError
-                      ? COLORS._red
-                      : COLORS._input_border,
-                  },
-                ]}
-                value={email}
-                onChangeText={emailHandle}
-              />
-              {emailError ? (
-                <Text style={styles.errorText}>{emailError}</Text>
+              {passwordError ? (
+                <Text style={styles.errorText}>{passwordError}</Text>
               ) : null}
             </View>
-          ) : (
-            <View style={{}}>
-              <PhoneInput
-                style={[
-                  styles.phone_input,
-                  {
-                    borderColor: phoneError
-                      ? COLORS._red
-                      : COLORS._input_border,
-                  },
-                ]}
-                placeholder="Mobile number"
-                containerStyle={[
-                  styles.phoneInputContainer,
-                  {
-                    borderColor: phoneError
-                      ? COLORS._red
-                      : COLORS._input_border,
-                  },
-                ]}
-                textContainerStyle={styles.textInputContainer}
-                textInputStyle={styles.textInput}
-                codeTextStyle={styles.codeText}
-                flagButtonStyle={styles.buttonStyle}
-                countryPickerButtonStyle={{
-                  color: COLORS._white,
-                }}
-                value={phone}
-                onChangeText={phoneHandle}
-              />
-              {phoneError ? (
-                <Text style={styles.errorText}>{phoneError}</Text>
-              ) : null}
-            </View>
-          )}
+            {/* ************************ Forgot Password? ********************** */}
 
-          <View
-            style={{
-              rowGap: 5,
-            }}>
-            <View style={styles.icons2}>
-              <Image
-                source={ICONS._lock}
-                style={styles.icons_styles_lock}
-                resizeMode="contain"
-              />
+            <View
+              style={{
+                width: '100%',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end',
+                marginTop: height * 0.013,
+                paddingHorizontal: 2,
+              }}>
+              <Text
+                onPress={()=> navigation.navigate('ForgotPassword')}
+                allowFontScaling={true}
+                style={{
+                  fontSize: SIZES._small,
+                  fontFamily: FONTS._poppins_regular,
+                  color: COLORS._red,
+                }}>
+                Forgot Password?
+              </Text>
             </View>
-            <View style={styles.lines}></View>
-            <TextInput
-              placeholder="Password"
-              placeholderTextColor={COLORS._placeholder}
-              secureTextEntry={true}
-              maxLength={16}
-              style={[
-                styles.input,
-                {
-                  borderColor: passwordError
-                    ? COLORS._red
-                    : COLORS._input_border,
-                },
-              ]}
-              value={password}
-              onChangeText={passwordHandle}
-            />
-            {passwordError ? (
-              <Text style={styles.errorText}>{passwordError}</Text>
-            ) : null}
+
+            {/* ************************ Login *********************** */}
+            <View
+              style={{
+                width: '100%',
+              }}>
+              <TouchableOpacity
+                onPress={handleLogin}
+                style={{
+                  width: '100%',
+                  backgroundColor: COLORS._red,
+                  height: height * 0.075,
+                  borderRadius: SIZES._xxSmall,
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  alignItems: 'center',
+                  marginTop: height * 0.03,
+                }}>
+                <Text
+                  allowFontScaling={true}
+                  style={{
+                    color: COLORS._white,
+                    fontSize: SIZES._medium,
+                    fontFamily: FONTS._class_display_Medium,
+                  }}>
+                  LOGIN
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {/* ************************ Create Account ********************** */}
+            <View
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                alignContent: 'center',
+                alignItems: 'center',
+                marginTop: height * 0.03,
+              }}>
+              <Text
+                allowFontScaling={true}
+                style={{
+                  fontFamily: FONTS._poppins_regular,
+                  fontSize: SIZES._small,
+                  color: COLORS._black,
+                }}>
+                Don’t have account?{' '}
+                <Text
+                  allowFontScaling={true}
+                  style={{
+                    fontFamily: FONTS._poppins_medium,
+                    fontSize: SIZES._xxMedium,
+                    color: COLORS._red,
+                  }}>
+                  SIGN UP
+                </Text>
+              </Text>
+            </View>
+            {/* *************************** container ************************* */}
           </View>
-        </View>
-        {/* ************************ Forgot Password? ********************** */}
-
-        <View
-          style={{
-            width: '100%',
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            marginTop: height * 0.013,
-            paddingHorizontal: 2,
-          }}>
-          <Text
-            allowFontScaling={true}
-            style={{
-              fontSize: SIZES._small,
-              fontFamily: FONTS._poppins_regular,
-              color: COLORS._red,
-            }}>
-            Forgot Password?
-          </Text>
-        </View>
-
-        {/* ************************ Login *********************** */}
-        <View
-          style={{
-            width: '100%',
-          }}>
-          <TouchableOpacity
-            onPress={handleLogin}
-            style={{
-              width: '100%',
-              backgroundColor: COLORS._red,
-              height: height * 0.075,
-              borderRadius: SIZES._xxSmall,
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-              marginTop: height * 0.03,
-            }}>
-            <Text
-              allowFontScaling={true}
-              style={{
-                color: COLORS._white,
-                fontSize: SIZES._medium,
-                fontFamily: FONTS._class_display_Medium,
-              }}>
-              LOGIN
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/* ************************ Create Account ********************** */}
-        <View
-          style={{
-            width: '100%',
-            justifyContent: 'center',
-            alignContent: 'center',
-            alignItems: 'center',
-            marginTop: height * 0.03,
-          }}>
-          <Text
-            allowFontScaling={true}
-            style={{
-              fontFamily: FONTS._poppins_regular,
-              fontSize: SIZES._small,
-              color: COLORS._black,
-            }}>
-            Don’t have account?{' '}
-            <Text
-              allowFontScaling={true}
-              style={{
-                fontFamily: FONTS._poppins_medium,
-                fontSize: SIZES._xxMedium,
-                color: COLORS._red,
-              }}>
-              SIGN UP
-            </Text>
-          </Text>
-        </View>
-        {/* *************************** container ************************* */}
-      </View>
-    </SafeAreaView>
+        </SafeAreaView>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 
@@ -407,12 +468,10 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS._white,
     paddingHorizontal: SIZES._medium,
   },
   main: {
     flex: 1,
-    backgroundColor: COLORS._white,
   },
   input: {
     backgroundColor: COLORS._input_bg,
@@ -448,8 +507,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: SIZES._xxSmall,
     paddingVertical: 0,
     backgroundColor: COLORS._input_bg,
-    borderLeftWidth: 2,
-    borderLeftColor: '#615858',
+    borderLeftWidth: 5,
+    borderLeftColor: COLORS._input_border,
   },
   textInput: {
     color: COLORS._black,
@@ -470,7 +529,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 14,
+    marginTop: 16,
     marginLeft: 20,
     borderRadius: SIZES._xxSmall - 2,
     borderWidth: 2,
@@ -484,7 +543,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 14,
+    marginTop: 16,
     marginLeft: 20,
     borderRadius: SIZES._xxSmall - 2,
     // borderWidth: 1,
@@ -494,6 +553,9 @@ const styles = StyleSheet.create({
     height: '60%',
     width: '60%',
   },
+  rotate:{
+    transform: [{ rotate: '-45deg' }]
+  },
   icons_styles_lock: {
     height: '100%',
     width: '100%',
@@ -501,13 +563,11 @@ const styles = StyleSheet.create({
   lines: {
     position: 'absolute',
     zIndex: 1,
-    left: '18%',
-    right: 0,
-    top: '18%',
-    bottom: 0,
     height: '60%',
     width: 3,
     backgroundColor: COLORS._input_border,
+    marginLeft: 65,
+    marginTop: 14,
   },
   errorText: {
     color: COLORS._red,

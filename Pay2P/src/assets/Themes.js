@@ -1,13 +1,15 @@
 const IMAGES = {
   _splash: require('./images/Splash.png'),
+  _loginbackground: require('./images/loginbackground.jpg'),
 };
 
 const ICONS = {
   _app_logo: require('./icons/app_logo.png'),
-  _email: require('./icons/email_icon.png'),
+  _email: require('./icons/envelope.png'),
   _back: require('./icons/Back.png'),
-  _eye: require('./icons/eye_icon.png'),
-  _lock: require('./icons/lock_icon.png'),
+  _eye: require('./icons/eye.png'),
+  _eyeHide: require('./icons/hidden.png'),
+  _lock: require('./icons/key.png'),
   _line: require('./icons/line_icon.png'),
 };
 
@@ -44,10 +46,12 @@ const COLORS = {
   _red: '#EC1F24',
   _light_red: 'rgba(255, 100, 100, 0.5);',
   _gray: '#78819F',
+  _green: '#3A8738',
   _buttom_text: 'rgba(38, 38, 38, 0.5);',
   _placeholder: '#B4B4B4',
   _input_bg: '#F2F2F2',
   _input_border: '#E1E1E1',
+  _otpBox:'#A9A9A9',
 };
 
 export {IMAGES, ICONS, FONTS, SIZES, COLORS};

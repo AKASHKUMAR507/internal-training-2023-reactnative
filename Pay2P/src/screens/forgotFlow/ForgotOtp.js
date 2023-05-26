@@ -17,7 +17,7 @@ const {height, width} = Dimensions.get('screen');
 
 const OTP_TIMEOUT = 1;
 
-const OTP_Screen = ({navigation, route}) => {
+const ForgotOtp = ({navigation, route}) => {
   const {data} = route.params;
   const email_phone = data.loginData;
   const email = email_phone;
@@ -79,7 +79,7 @@ const OTP_Screen = ({navigation, route}) => {
       setInvalid(true);
       setShowModal(true);
       setTimeout(() => {
-        navigation.navigate('Home');
+        navigation.navigate('ResetPassword');
       }, 2000);
     } else {
       setInvalid(false);
@@ -181,19 +181,6 @@ const OTP_Screen = ({navigation, route}) => {
               width: '100%',
               flexDirection: 'row-reverse',
             }}>
-            {/* {seconds != 0 ? (
-              <>
-                <Text
-                  style={{
-                    color: COLORS._black,
-                    fontSize: SIZES._medium,
-                    fontFamily: FONTS._poppins_regular,
-                  }}>
-                  {minutes < 10 ? `0${minutes}` : minutes}:
-                  {seconds < 10 ? `0${seconds}` : seconds}
-                </Text>
-              </>
-            ) : null} */}
             <Text
               style={{
                 color: COLORS._black,
@@ -276,7 +263,7 @@ const OTP_Screen = ({navigation, route}) => {
   );
 };
 
-export default OTP_Screen;
+export default ForgotOtp;
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -294,7 +281,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS._input_bg,
     borderWidth: 1,
     borderColor: COLORS._input_border,
-    paddingBottom:-8,
+    paddingBottom: -8,
   },
   button: {
     marginTop: '4%',
