@@ -9,16 +9,16 @@ import {
   Modal,
   ScrollView,
 } from 'react-native';
-import React, {useRef, useState, useEffect} from 'react';
-import {COLORS, FONTS, SIZES} from '../../assets/Themes';
+import React, { useRef, useState, useEffect } from 'react';
+import { COLORS, FONTS, SIZES } from '../../assets/Themes';
 import BackBtn from '../../components/buttons/BackBtn';
 import Success from '../../components/Success';
-const {height, width} = Dimensions.get('screen');
+const { height, width } = Dimensions.get('screen');
 
 const OTP_TIMEOUT = 1;
 
-const ForgotOtp = ({navigation, route}) => {
-  const {data} = route.params;
+const ForgotOtp = ({ navigation, route }) => {
+  const { data } = route.params;
   const email_phone = data.loginData;
   const email = email_phone;
 
@@ -29,8 +29,10 @@ const ForgotOtp = ({navigation, route}) => {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const numRegex = /^[0-9]$/;
   const [invalid, setInvalid] = useState(true);
-  const [loginSuccess, setLoginSuccess] = useState(true);
+  const [otpResend, setOtpResend] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showModalOTP, setShowModalOTP] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(true);
 
   let otp_Succes_Length = otp.toString().length === 11;
 
@@ -46,10 +48,18 @@ const ForgotOtp = ({navigation, route}) => {
 
   const handleResendOTP = () => {
     setTime(OTP_TIMEOUT * 60);
+    if (seconds === 0) {
+      setOtpResend(true);
+      setShowModalOTP(true);
+    } else {
+      setOtpResend(false);
+      setShowModalOTP(true);
+    }
   };
-
   const seconds = time % 60;
   const minutes = Math.floor(time / 60);
+
+
 
   // otp box
   const handleOtpChange = (index, value) => {
@@ -90,11 +100,15 @@ const ForgotOtp = ({navigation, route}) => {
   const closeModal = () => {
     setShowModal(false);
   };
+  const closeModalOTP = () => {
+    setShowModalOTP(false);
+  };
+
 
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={{flex: 1, backgroundColor: COLORS._white}}>
+      style={{ flex: 1, backgroundColor: COLORS._white }}>
       <SafeAreaView
         style={{
           flex: 1,
@@ -199,7 +213,9 @@ const ForgotOtp = ({navigation, route}) => {
               alignContent: 'center',
               alignItems: 'center',
             }}>
-            <TouchableOpacity disabled={!(time == 0)} onPress={handleResendOTP}>
+            <TouchableOpacity
+              // disabled={!(time == 0)} 
+              onPress={handleResendOTP}>
               <Text
                 style={{
                   color: COLORS._red,
@@ -238,13 +254,7 @@ const ForgotOtp = ({navigation, route}) => {
         {/* ******************** Success Message ********************  */}
 
         {invalid == true ? (
-          <Modal visible={showModal} animationType="slide" transparent>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <Text style={styles.modalText}>OTP Resend Successfully !</Text>
-              </View>
-            </View>
-          </Modal>
+          null
         ) : (
           <Modal visible={showModal} animationType="slide" transparent>
             <TouchableOpacity
@@ -258,10 +268,36 @@ const ForgotOtp = ({navigation, route}) => {
             </TouchableOpacity>
           </Modal>
         )}
+
+        {otpResend == true ? (
+          null
+        ) : (
+          <Modal
+            visible={showModalOTP}
+            animationType="slide"
+            transparent
+          >
+            <TouchableOpacity style={{
+              flex: 1,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            }}
+              onPress={closeModalOTP}
+            >
+              <View style ={styles.modalContent}>
+                <Text style ={styles.modalText}>OTP send Succesfully</Text>
+              </View>
+            </TouchableOpacity>
+          </Modal>
+        )}
+
+
+
+
       </SafeAreaView>
     </ScrollView>
   );
 };
+
 
 export default ForgotOtp;
 

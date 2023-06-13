@@ -129,7 +129,7 @@ const ForgotPassword = ({navigation}) => {
             <View
               style={{
                 backgroundColor: COLORS._input_bg,
-                height: height * 0.065,
+                height: 60,
                 borderRadius: 50,
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
@@ -185,7 +185,7 @@ const ForgotPassword = ({navigation}) => {
           <View
             style={{
               rowGap: 8,
-              marginTop: height * 0.04,
+              marginTop: height * 0.1,
             }}>
             {themes === 'email' ? (
               <>
@@ -268,7 +268,7 @@ const ForgotPassword = ({navigation}) => {
               style={{
                 width: '100%',
                 backgroundColor: COLORS._red,
-                height: height * 0.075,
+                height: 60,
                 borderRadius: SIZES._xxSmall,
                 justifyContent: 'center',
                 alignContent: 'center',
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: COLORS._input_bg,
-    height: height * 0.075,
+    height: 60,
     borderRadius: SIZES._xxSmall,
     paddingLeft: SIZES._huge,
     color: COLORS._black,
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
   },
   phone_input: {
     backgroundColor: COLORS._input_bg,
-    height: height * 0.075,
+    height: 60,
     paddingLeft: SIZES._huge,
     color: COLORS._black,
     paddingRight: SIZES._small,
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   },
   phoneInputContainer: {
     width: '100%',
-    height: height * 0.075,
+    height: 60,
     borderRadius: SIZES._xxSmall,
     paddingVertical: 0,
     backgroundColor: COLORS._input_bg,

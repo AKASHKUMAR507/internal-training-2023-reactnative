@@ -7,14 +7,13 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  ImageBackground,
   ScrollView,
   Modal,
 } from 'react-native';
 import React, {useState} from 'react';
 import {IMAGES, ICONS, FONTS, SIZES, COLORS} from '../../assets/Themes';
 import {
-  validationPassword,
+  validationPassword, 
   validationEmail,
   validationPhone,
 } from '../../assets/Validation/';

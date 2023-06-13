@@ -9,16 +9,16 @@ import {
   Modal,
   ScrollView,
 } from 'react-native';
-import React, {useRef, useState, useEffect} from 'react';
-import {COLORS, FONTS, SIZES} from '../../assets/Themes';
+import React, { useRef, useState, useEffect } from 'react';
+import { COLORS, FONTS, SIZES } from '../../assets/Themes';
 import BackBtn from '../../components/buttons/BackBtn';
 import Success from '../../components/Success';
-const {height, width} = Dimensions.get('screen');
+const { height, width } = Dimensions.get('screen');
 
 const OTP_TIMEOUT = 1;
 
-const OTP_Screen = ({navigation, route}) => {
-  const {data} = route.params;
+const OTP_Screen = ({ navigation, route }) => {
+  const { data } = route.params;
   const email_phone = data.loginData;
   const email = email_phone;
 
@@ -29,8 +29,10 @@ const OTP_Screen = ({navigation, route}) => {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const numRegex = /^[0-9]$/;
   const [invalid, setInvalid] = useState(true);
+  const [send, setSend] = useState(true);
   const [loginSuccess, setLoginSuccess] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showModalOtp, setShowModalOtp] = useState(false);
 
   let otp_Succes_Length = otp.toString().length === 11;
 
@@ -46,6 +48,13 @@ const OTP_Screen = ({navigation, route}) => {
 
   const handleResendOTP = () => {
     setTime(OTP_TIMEOUT * 60);
+    if (time == 0) {
+      setSend(true)
+      setShowModalOtp(true);
+    } else {
+      setShowModalOtp(true);
+      setSend(false)
+    }
   };
 
   const seconds = time % 60;
@@ -76,11 +85,9 @@ const OTP_Screen = ({navigation, route}) => {
 
   const handlePress = () => {
     if (OTP.toString() === otp.toString()) {
-      setInvalid(true);
-      setShowModal(true);
       setTimeout(() => {
         navigation.navigate('Home');
-      }, 2000);
+      }, );
     } else {
       setInvalid(false);
       setShowModal(true);
@@ -91,10 +98,14 @@ const OTP_Screen = ({navigation, route}) => {
     setShowModal(false);
   };
 
+  const closeModalOtp = () => {
+    setShowModalOtp(false);
+  };
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={{flex: 1, backgroundColor: COLORS._white}}>
+      style={{ flex: 1, backgroundColor: COLORS._white }}>
       <SafeAreaView
         style={{
           flex: 1,
@@ -181,19 +192,7 @@ const OTP_Screen = ({navigation, route}) => {
               width: '100%',
               flexDirection: 'row-reverse',
             }}>
-            {/* {seconds != 0 ? (
-              <>
-                <Text
-                  style={{
-                    color: COLORS._black,
-                    fontSize: SIZES._medium,
-                    fontFamily: FONTS._poppins_regular,
-                  }}>
-                  {minutes < 10 ? `0${minutes}` : minutes}:
-                  {seconds < 10 ? `0${seconds}` : seconds}
-                </Text>
-              </>
-            ) : null} */}
+
             <Text
               style={{
                 color: COLORS._black,
@@ -251,14 +250,22 @@ const OTP_Screen = ({navigation, route}) => {
         {/* ******************** Success Message ********************  */}
 
         {invalid == true ? (
-          <Modal visible={showModal} animationType="slide" transparent>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <Text style={styles.modalText}>OTP Resend Successfully !</Text>
+          <Modal visible={showModalOtp} animationType="slide" transparent>
+            <TouchableOpacity
+              style={styles.modalContainer}
+              onPress={closeModalOtp}
+            >
+              <View style={styles.modalContainer}>
+                <View style={styles.modalContent}>
+                  <Text style={styles.modalText}>OTP Resend Successfully !</Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </Modal>
         ) : (
+          null
+        )}
+        {send == true ? (
           <Modal visible={showModal} animationType="slide" transparent>
             <TouchableOpacity
               style={styles.modalContainer}
@@ -270,7 +277,7 @@ const OTP_Screen = ({navigation, route}) => {
               </View>
             </TouchableOpacity>
           </Modal>
-        )}
+        ) : null}
       </SafeAreaView>
     </ScrollView>
   );
@@ -294,14 +301,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS._input_bg,
     borderWidth: 1,
     borderColor: COLORS._input_border,
-    paddingBottom:-8,
+    paddingBottom: -8,
   },
   button: {
     marginTop: '4%',
     width: '100%',
   },
   submitBUtton: {
-    height: height * 0.075,
+    height: 60,
     width: '100%',
     borderRadius: SIZES._xxSmall,
     justifyContent: 'center',
